@@ -1,35 +1,39 @@
 ## React Truffle unbox
 
-````shell
+```
 mkdir truffle_react_ipfs
 cd truffle_react_ipfs
 npx truffle unbox react
+```
 
-Unbox successful, sweet!
+### Unbox successful, sweet!
 
-Commands:
-
+```
+#Commands:
   Compile:              truffle compile
   Migrate:              truffle migrate
   Test contracts:       truffle test
   Test dapp:            cd client && npm test
   Run dev server:       cd client && npm run start
   Build for production: cd client && npm run build
-````shell
+```
 
 - Add compiler section to truffle-config.js
-
-truffle com
+```
+  truffle com
+```
 
 ### With Ganache
-> truffle migrate
-> start ganache
-> Add account & network in metamask
-> cd client && npm run start
+```
+ truffle migrate
+``` 
+- Start ganache
+- Add account & network in metamask
+- cd client && npm run start
 
 
-### On Quorum 7nodes
-````shell
+## On Quorum 7nodes
+```
     quorum_vm: {
       host: "35.233.157.163",
       port: 22000, // was 8545
@@ -38,10 +42,13 @@ truffle com
       type: "quorum",
       gas: 4500000
     }
-````shell
-> truffle migrate --network quorum_vm  
-or
-> truffle migrate --network quorum_vm --reset
+```
+#### Run below cmd to migrate onto quorum
+```
+truffle migrate --network quorum_vm  
+#or
+truffle migrate --network quorum_vm --reset
+```
 
 #### above command may sometime result in error: Could not connect to your Ethereum client with the following parameters
 #### Keep try
