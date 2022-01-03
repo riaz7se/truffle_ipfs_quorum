@@ -1,6 +1,9 @@
-❯ mkdir truffle_react_ipfs
-❯ cd truffle_react_ipfs
-❯ npx truffle unbox react
+## React Truffle unbox
+
+````shell
+mkdir truffle_react_ipfs
+cd truffle_react_ipfs
+npx truffle unbox react
 
 Unbox successful, sweet!
 
@@ -12,9 +15,11 @@ Commands:
   Test dapp:            cd client && npm test
   Run dev server:       cd client && npm run start
   Build for production: cd client && npm run build
+````shell
 
 - Add compiler section to truffle-config.js
-> truffle com
+
+truffle com
 
 ### With Ganache
 > truffle migrate
