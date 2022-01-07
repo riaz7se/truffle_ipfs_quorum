@@ -1,70 +1,153 @@
 import React, { Component } from "react";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
+import IpfsStorageContract from "./contracts/IpfsStorage.json";
 import getWeb3 from "./getWeb3";
-
 import "./App.css";
+import { create as ipfsHttpClient } from "ipfs-http-client";
+
+const infuraIpfsClient = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+  state = {
+    storageValue: null,
+    web3: null,
+    accounts: null,
+    contract: null,
+    networkId: null,
+    fileUrl: null,
+    ipfsHash: null,
+  };
 
-  componentDidMount = async () => {
+  componentDidMount = async () => {};
+
+  uploadFile = async (e) => {
+    const file = e.target.files[0];
+    const { web3, accounts, networkId, ipfsHash } = this.state;
     try {
-      // Get network provider and web3 instance.
-      const web3 = await getWeb3();
+      const added = await infuraIpfsClient.add(file);
+      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
 
-      // Use web3 to get the user's accounts.
-      const accounts = await web3.eth.getAccounts();
-
-      // Get the contract instance.
-      const networkId = await web3.eth.net.getId();
-      const deployedNetwork = SimpleStorageContract.networks[networkId];
-      const instance = new web3.eth.Contract(
-        SimpleStorageContract.abi,
-        deployedNetwork && deployedNetwork.address,
+      const ipfsDeployedNetwork = IpfsStorageContract.networks[networkId];
+      const ipfsContract = new web3.eth.Contract(
+        IpfsStorageContract.abi,
+        ipfsDeployedNetwork && ipfsDeployedNetwork.address
       );
 
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
+      this.setState(
+        { fileUrl: url, ipfsHash: added.path, contract: ipfsContract },
+        this.runContract
+      );
     } catch (error) {
-      // Catch any errors for any of the above operations.
-      alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`,
-      );
-      console.error(error);
+      console.log("Error uploading file: ", error);
     }
   };
 
-  runExample = async () => {
-    const { accounts, contract } = this.state;
+  runContract = async () => {
+    const { web3, accounts, contract, ipfsHash } = this.state;
 
-    // Stores a given value, 5 by default.
-    await contract.methods.set(7).send({ from: accounts[0] });
+    var bytecode =
+      "0x608060405234801561001057600080fd5b506104a8806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c80634ed3885e1461003b5780636d4ce63c14610057575b600080fd5b6100556004803603810190610050919061031e565b610075565b005b61005f61008f565b60405161006c91906103ef565b60405180910390f35b806000908051906020019061008b929190610121565b5050565b60606000805461009e90610440565b80601f01602080910402602001604051908101604052809291908181526020018280546100ca90610440565b80156101175780601f106100ec57610100808354040283529160200191610117565b820191906000526020600020905b8154815290600101906020018083116100fa57829003601f168201915b5050505050905090565b82805461012d90610440565b90600052602060002090601f01602090048101928261014f5760008555610196565b82601f1061016857805160ff1916838001178555610196565b82800160010185558215610196579182015b8281111561019557825182559160200191906001019061017a565b5b5090506101a391906101a7565b5090565b5b808211156101c05760008160009055506001016101a8565b5090565b6000604051905090565b600080fd5b600080fd5b600080fd5b600080fd5b6000601f19601f8301169050919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b61022b826101e2565b810181811067ffffffffffffffff8211171561024a576102496101f3565b5b80604052505050565b600061025d6101c4565b90506102698282610222565b919050565b600067ffffffffffffffff821115610289576102886101f3565b5b610292826101e2565b9050602081019050919050565b82818337600083830152505050565b60006102c16102bc8461026e565b610253565b9050828152602081018484840111156102dd576102dc6101dd565b5b6102e884828561029f565b509392505050565b600082601f830112610305576103046101d8565b5b81356103158482602086016102ae565b91505092915050565b600060208284031215610334576103336101ce565b5b600082013567ffffffffffffffff811115610352576103516101d3565b5b61035e848285016102f0565b91505092915050565b600081519050919050565b600082825260208201905092915050565b60005b838110156103a1578082015181840152602081019050610386565b838111156103b0576000848401525b50505050565b60006103c182610367565b6103cb8185610372565b93506103db818560208601610383565b6103e4816101e2565b840191505092915050565b6000602082019050818103600083015261040981846103b6565b905092915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052602260045260246000fd5b6000600282049050600182168061045857607f821691505b6020821081141561046c5761046b610411565b5b5091905056fea26469706673582212200f142a0e63b4f4230d28789d38102817913394a61ac375dae3b02f9727c1bde864736f6c634300080b0033";
 
-    // Get the value from the contract to prove it worked.
+    //var deployedBytecode = "0x608060405234801561001057600080fd5b50600436106100365760003560e01c80634ed3885e1461003b5780636d4ce63c14610057575b600080fd5b6100556004803603810190610050919061031e565b610075565b005b61005f61008f565b60405161006c91906103ef565b60405180910390f35b806000908051906020019061008b929190610121565b5050565b60606000805461009e90610440565b80601f01602080910402602001604051908101604052809291908181526020018280546100ca90610440565b80156101175780601f106100ec57610100808354040283529160200191610117565b820191906000526020600020905b8154815290600101906020018083116100fa57829003601f168201915b5050505050905090565b82805461012d90610440565b90600052602060002090601f01602090048101928261014f5760008555610196565b82601f1061016857805160ff1916838001178555610196565b82800160010185558215610196579182015b8281111561019557825182559160200191906001019061017a565b5b5090506101a391906101a7565b5090565b5b808211156101c05760008160009055506001016101a8565b5090565b6000604051905090565b600080fd5b600080fd5b600080fd5b600080fd5b6000601f19601f8301169050919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b61022b826101e2565b810181811067ffffffffffffffff8211171561024a576102496101f3565b5b80604052505050565b600061025d6101c4565b90506102698282610222565b919050565b600067ffffffffffffffff821115610289576102886101f3565b5b610292826101e2565b9050602081019050919050565b82818337600083830152505050565b60006102c16102bc8461026e565b610253565b9050828152602081018484840111156102dd576102dc6101dd565b5b6102e884828561029f565b509392505050565b600082601f830112610305576103046101d8565b5b81356103158482602086016102ae565b91505092915050565b600060208284031215610334576103336101ce565b5b600082013567ffffffffffffffff811115610352576103516101d3565b5b61035e848285016102f0565b91505092915050565b600081519050919050565b600082825260208201905092915050565b60005b838110156103a1578082015181840152602081019050610386565b838111156103b0576000848401525b50505050565b60006103c182610367565b6103cb8185610372565b93506103db818560208601610383565b6103e4816101e2565b840191505092915050565b6000602082019050818103600083015261040981846103b6565b905092915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052602260045260246000fd5b6000600282049050600182168061045857607f821691505b6020821081141561046c5761046b610411565b5b5091905056fea26469706673582212200f142a0e63b4f4230d28789d38102817913394a61ac375dae3b02f9727c1bde864736f6c634300080b0033";
+
+    await contract.methods.set(this.state.ipfsHash).send(
+      {
+        from: accounts[0],
+        data: bytecode,
+        gas: 0x47b760,
+        privateFor: ["ROAZBWtSacxXQrOe3FGAqJDyJjFePR5ce4TSIzmJ0Bc="],
+      },
+      (error, transactionHash) => {
+        if (error) {
+          alert("Error while sending Transaction to Smart Contract");
+          return;
+        }
+        //0x3f6b90cca5bdfb6875e408ea066f24b9402fe46b4594e7564a94475c015053cd
+        web3.eth.getTransactionReceipt(transactionHash, (error, txReceipt) => {
+          if (error) {
+            alert("Error while getting Trans Receipt");
+            return;
+          }
+          console.log("Trans Receipt: ", txReceipt);
+          this.setState({ txReceipt });
+        });
+      }
+    );
     const response = await contract.methods.get().call();
-
-    // Update state with the result.
-    this.setState({ storageValue: response });
+    //this.setState({ storageValue: response });
+    console.log("Ipfs Contract response:", response);
   };
 
   render() {
-    if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
-    }
+    const connectBlockchain = async (e) => {
+      e.preventDefault();
+      try {
+        const web3 = await getWeb3();
+        const accounts = await web3.eth.getAccounts();
+
+        const networkId = await web3.eth.net.getId();
+
+        //0x3f6b90cca5bdfb6875e408ea066f24b9402fe46b4594e7564a94475c015053cd
+        // web3.eth.getTransactionReceipt(
+        //   "0x3f6b90cca5bdfb6875e408ea066f24b9402fe46b4594e7564a94475c015053cd",
+        //   (error, txReceipt) => {
+        //     if (error) {
+        //       alert("Error while getting Trans Receipt");
+        //       return;
+        //     }
+        //     console.log("Trans Receipt: ", txReceipt);
+        //     this.setState({ txReceipt });
+        //   }
+        // );
+
+        const ipfsDeployedNetwork = IpfsStorageContract.networks[networkId];
+        const ipfsContract = new web3.eth.Contract(
+          IpfsStorageContract.abi,
+          ipfsDeployedNetwork && ipfsDeployedNetwork.address
+        );
+        const ipfsH = await ipfsContract.methods.get().call();
+        alert("get call: ", ipfsH);
+        const url = "https://ipfs.infura.io/ipfs/" + ipfsH;
+
+        this.setState({ fileUrl: url });
+
+        this.setState({ storageValue: accounts[0], web3, accounts, networkId });
+      } catch (error) {
+        alert("Failed to load web3, accounts, or contract");
+        console.error(error);
+      }
+    };
+
     return (
       <div className="App">
-        <h1>Good to Go!</h1>
-        <p>Your Truffle Box is installed and ready.</p>
-        <h2>Smart Contract Example</h2>
-        <p>
-          If your contracts compiled and migrated successfully, below will show
-          a stored value of 5 (by default).
-        </p>
-        <p>
-          Try changing the value stored on <strong>line 42</strong> of App.js.
-        </p>
-        <div>The stored value is: {this.state.storageValue}</div>
+        <form>
+          <div className="form-group row">
+            <div className="col-12">
+              <button
+                type="button"
+                onClick={connectBlockchain}
+                className={`w-100 btn text-truncate ${
+                  this.state.storageValue !== null
+                    ? "disabled btn-success"
+                    : "btn-danger"
+                }`}
+              >
+                {this.state.storageValue !== null
+                  ? "Blockchain Connected"
+                  : "Connect Blockchain"}
+              </button>
+            </div>
+          </div>
+        </form>
+        <div>Metamask Account: {this.state.storageValue}</div>
+        <h1>IPFS Example</h1>
+        <input type="file" onChange={this.uploadFile} />
+        {this.state.fileUrl && (
+          <img src={this.state.fileUrl} width="600px" alt="IPFS loaded" />
+        )}
+        {this.state.ipfsHash !== null
+          ? "IPFS Hash::" + this.state.ipfsHash
+          : ""}
       </div>
     );
   }
