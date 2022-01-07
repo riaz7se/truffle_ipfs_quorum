@@ -1,6 +1,5 @@
 # DApp with file upload on IPFS and Smart Contract on Quorum Blockchain
 -Still under development
-
 ## React Truffle unbox
 
 ```
@@ -69,18 +68,12 @@ Chain ID: 10
 - "ciphertext":"4e77046ba3f699e744acb4a89c36a3ea1158a1bd90a076d36675f4c883864377"
 #### In browser, localhost:3000/, metamask asks for confirmation. do confirm. Copy Transid from metamask and execute below cmd in quorum node
 - eth.getTransaction('0xa192d724490758b94fd5d8d2dad35a3d3d3b53178f34a98da7ea61138d89704b')
-<<<<<<< HEAD
-=======
-
-
-
 
 ### Quorum account keys from /key for adding to Metamask
--4e77046ba3f699e744acb4a89c36a3ea1158a1bd90a076d36675f4c883864377
--01d409941ce57b83a18597058033657182ffb10ae15d7d0906b8a8c04c8d1e3a
--6b2c72c6793f3da8185e36536e02f574805e41c18f551f24b58346ef4ecf3640
--d160a630a39be3ff35556055406d8ff2a635f0535fe298d62ccc812d8f7b3bd5
+Node1 Acc:-4e77046ba3f699e744acb4a89c36a3ea1158a1bd90a076d36675f4c883864377
+Node2 Acc:-01d409941ce57b83a18597058033657182ffb10ae15d7d0906b8a8c04c8d1e3a
+Node3 Acc:-6b2c72c6793f3da8185e36536e02f574805e41c18f551f24b58346ef4ecf3640
+Node4 Acc:-d160a630a39be3ff35556055406d8ff2a635f0535fe298d62ccc812d8f7b3bd5
 
--7
-a522d53d5a86405435f6288d4e34b0c038de25f46fa935b0be78fd24d4aa65da
->>>>>>> aa430d0 (Image upload to IPFS and store hash in sc quorum)
+Node7 Acc:-a522d53d5a86405435f6288d4e34b0c038de25f46fa935b0be78fd24d4aa65da
+
