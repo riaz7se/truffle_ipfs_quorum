@@ -104,22 +104,51 @@ class App extends Component {
         });
 
         console.log("Contract address: ", tx.contractAddress);
-        const ipfsContract2 = new web3.eth.Contract(
-          IpfsStorageContract.abi,
-          tx.contractAddress
-        );
-        const ipfsHashGet = await ipfsContract2.methods.get().call();
-        console.log("result :>> ", ipfsHashGet);
-
-        const url = "https://ipfs.infura.io/ipfs/" + ipfsHashGet;
-        this.setState({ fileUrl: url });
-
-        return ipfsContract2;
+        const simpleContract2 = new web3.eth.Contract(abi, tx.contractAddress);
+        const result = await simpleContract2.methods.get().call();
+        console.log("result :>> ", result);
+        return simpleContract2;
       } catch (error) {
         console.error("error :>> ", error);
         return error;
       }
     })();
+
+    await contract.methods.set(this.state.ipfsHash).send(
+      {
+        from: accounts[0],
+        data: bytecode,
+        gas: 0x47b760,
+        privateFor: ["ROAZBWtSacxXQrOe3FGAqJDyJjFePR5ce4TSIzmJ0Bc="],
+      },
+      (error, transactionHash) => {
+        if (error) {
+          alert("Error while sending Transaction to Smart Contract");
+          return;
+        }
+        console.log("Trans Hash::", transactionHash);
+        //0x3f6b90cca5bdfb6875e408ea066f24b9402fe46b4594e7564a94475c015053cd
+
+        const transReceipt = async () => {
+          await web3.eth.getTransactionReceipt(
+            transactionHash,
+            (error, txReceipt) => {
+              if (error) {
+                alert("Error while getting Trans Receipt");
+                return;
+              }
+              console.log("Trans Receipt: ", txReceipt);
+              this.setState({ txReceipt });
+            }
+          );
+        };
+        transReceipt();
+      }
+    );
+    const response = await contract.methods.get().call();
+
+    //this.setState({ storageValue: response });
+    console.log("Ipfs Contract response:", response);
   };
 
   render() {
@@ -132,6 +161,9 @@ class App extends Component {
         console.log("eth.acc: ", accounts[0]);
 
         const networkId = await web3.eth.net.getId();
+
+        const privnet = await web3.priv.net.getId();
+        console.log("priv.acc: ", privnet);
 
         const ipfsDeployedNetwork = IpfsStorageContract.networks[networkId];
         this.setState({ ipfsDeployedAddr: ipfsDeployedNetwork.address });

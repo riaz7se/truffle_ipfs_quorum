@@ -4305,17 +4305,17 @@
   dependencies:
     "js-sha3" "^0.8.0"
 
-"ethereumjs-common@^1.3.1", "ethereumjs-common@^1.3.2":
-  "integrity" "sha512-ser2SAplX/YI5W2AnzU8wmSjKRy4KQd4uxInJ36BzjS3m18E/B9QedPUIresZN1CSEQb/RgNQ2gN7C/XbpTafA=="
-  "resolved" "https://registry.npmjs.org/ethereumjs-common/-/ethereumjs-common-1.4.0.tgz"
-  "version" "1.4.0"
+"ethereumjs-common@^1.3.2", "ethereumjs-common@^1.5.0":
+  "integrity" "sha512-hTfZjwGX52GS2jcVO6E2sx4YuFnf0Fhp5ylo4pEPhEffNln7vS59Hr5sLnp3/QCazFLluuBZ+FZ6J5HTp0EqCA=="
+  "resolved" "https://registry.npmjs.org/ethereumjs-common/-/ethereumjs-common-1.5.2.tgz"
+  "version" "1.5.2"
 
-"ethereumjs-tx@^2.1.1":
-  "integrity" "sha512-QtVriNqowCFA19X9BCRPMgdVNJ0/gMBS91TQb1DfrhsbR748g4STwxZptFAwfqehMyrF8rDwB23w87PQwru0wA=="
-  "resolved" "https://registry.npmjs.org/ethereumjs-tx/-/ethereumjs-tx-2.1.1.tgz"
-  "version" "2.1.1"
+"ethereumjs-tx@^2.1.1", "ethereumjs-tx@^2.1.2":
+  "integrity" "sha512-zZEK1onCeiORb0wyCXUvg94Ve5It/K6GD1K+26KfFKodiBiS6d9lfCXlUKGBBdQ+bv7Day+JK0tj1K+BeNFRAw=="
+  "resolved" "https://registry.npmjs.org/ethereumjs-tx/-/ethereumjs-tx-2.1.2.tgz"
+  "version" "2.1.2"
   dependencies:
-    "ethereumjs-common" "^1.3.1"
+    "ethereumjs-common" "^1.5.0"
     "ethereumjs-util" "^6.0.0"
 
 "ethereumjs-util@^6.0.0":
@@ -4329,6 +4329,19 @@
     "ethjs-util" "0.1.6"
     "keccak" "^2.0.0"
     "rlp" "^2.2.3"
+    "secp256k1" "^3.0.1"
+
+"ethereumjs-util@6.1.0":
+  "integrity" "sha512-URESKMFbDeJxnAxPppnk2fN6Y3BIatn9fwn76Lm8bQlt+s52TpG8dN9M66MLPuRAiAOIqL3dfwqWJf0sd0fL0Q=="
+  "resolved" "https://registry.npmjs.org/ethereumjs-util/-/ethereumjs-util-6.1.0.tgz"
+  "version" "6.1.0"
+  dependencies:
+    "bn.js" "^4.11.0"
+    "create-hash" "^1.1.2"
+    "ethjs-util" "0.1.6"
+    "keccak" "^1.0.2"
+    "rlp" "^2.0.0"
+    "safe-buffer" "^5.1.1"
     "secp256k1" "^3.0.1"
 
 "ethers@4.0.0-beta.3":
@@ -6801,6 +6814,16 @@
     "array-includes" "^3.0.3"
     "object.assign" "^4.1.0"
 
+"keccak@^1.0.2":
+  "integrity" "sha512-eZVaCpblK5formjPjeTBik7TAg+pqnDrMHIffSvi9Lh7PQgM1+hSzakUeZFCk9DVVG0dacZJuaz2ntwlzZUIBw=="
+  "resolved" "https://registry.npmjs.org/keccak/-/keccak-1.4.0.tgz"
+  "version" "1.4.0"
+  dependencies:
+    "bindings" "^1.2.1"
+    "inherits" "^2.0.3"
+    "nan" "^2.2.1"
+    "safe-buffer" "^5.1.0"
+
 "keccak@^2.0.0":
   "integrity" "sha512-rKe/lRr0KGhjoz97cwg+oeT1Rj/Y4cjae6glArioUC8JBF9ROGZctwIaaruM7d7naovME4Q8WcQSO908A8qcyQ=="
   "resolved" "https://registry.npmjs.org/keccak/-/keccak-2.0.0.tgz"
@@ -7000,10 +7023,10 @@
   "resolved" "https://registry.npmjs.org/lodash.uniq/-/lodash.uniq-4.5.0.tgz"
   "version" "4.5.0"
 
-"lodash@^4.17.11", "lodash@^4.17.12", "lodash@^4.17.13", "lodash@^4.17.14", "lodash@^4.17.15", "lodash@^4.17.5", "lodash@>=3.5 <5":
-  "integrity" "sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A=="
-  "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.15.tgz"
-  "version" "4.17.15"
+"lodash@^4.17.11", "lodash@^4.17.12", "lodash@^4.17.13", "lodash@^4.17.14", "lodash@^4.17.15", "lodash@^4.17.19", "lodash@^4.17.21", "lodash@^4.17.5", "lodash@>=3.5 <5":
+  "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
+  "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
+  "version" "4.17.21"
 
 "loglevel@^1.4.1":
   "integrity" "sha512-Sgr5lbboAUBo3eXCSPL4/KoVz3ROKquOjcctxmHIt+vol2DrqTQe3SwkKKuYhEiWB5kYa13YyopJ69deJ1irzQ=="
@@ -9751,19 +9774,19 @@
   "resolved" "https://registry.npmjs.org/repeat-string/-/repeat-string-1.6.1.tgz"
   "version" "1.6.1"
 
-"request-promise-core@1.1.3":
-  "integrity" "sha512-QIs2+ArIGQVp5ZYbWD5ZLCY29D5CfWizP8eWnm8FoGD1TX61veauETVQbrV60662V0oFBkrDOuaBI8XgtuyYAQ=="
-  "resolved" "https://registry.npmjs.org/request-promise-core/-/request-promise-core-1.1.3.tgz"
-  "version" "1.1.3"
+"request-promise-core@1.1.4":
+  "integrity" "sha512-TTbAfBBRdWD7aNNOoVOBH4pN/KigV6LyapYNNlAPA8JwbovRti1E88m3sYAwsLi5ryhPKsE9APwnjFTgdUjTpw=="
+  "resolved" "https://registry.npmjs.org/request-promise-core/-/request-promise-core-1.1.4.tgz"
+  "version" "1.1.4"
   dependencies:
-    "lodash" "^4.17.15"
+    "lodash" "^4.17.19"
 
-"request-promise-native@^1.0.5":
-  "integrity" "sha512-dapwLGqkHtwL5AEbfenuzjTYg35Jd6KPytsC2/TLkVMz8rm+tNt72MGUWT1RP/aYawMpN6HqbNGBQaRcBtjQMQ=="
-  "resolved" "https://registry.npmjs.org/request-promise-native/-/request-promise-native-1.0.8.tgz"
-  "version" "1.0.8"
+"request-promise-native@^1.0.5", "request-promise-native@^1.0.9":
+  "integrity" "sha512-wcW+sIUiWnKgNY0dqCpOZkUbF/I+YPi+f09JZIDa39Ec+q82CpSYniDp+ISgTTbKmnpJWASeJBPZmoxH84wt3g=="
+  "resolved" "https://registry.npmjs.org/request-promise-native/-/request-promise-native-1.0.9.tgz"
+  "version" "1.0.9"
   dependencies:
-    "request-promise-core" "1.1.3"
+    "request-promise-core" "1.1.4"
     "stealthy-require" "^1.1.1"
     "tough-cookie" "^2.3.3"
 
@@ -9939,7 +9962,7 @@
     "hash-base" "^3.0.0"
     "inherits" "^2.0.1"
 
-"rlp@^2.2.3":
+"rlp@^2.0.0", "rlp@^2.2.3", "rlp@2.2.4":
   "integrity" "sha512-fdq2yYCWpAQBhwkZv+Z8o/Z4sPmYm1CUq6P7n6lVTOdb949CnqA0sndXal5C1NleSVSZm6q5F3iEbauyVln/iw=="
   "resolved" "https://registry.npmjs.org/rlp/-/rlp-2.2.4.tgz"
   "version" "2.2.4"
@@ -11775,7 +11798,7 @@
     "underscore" "1.9.1"
     "utf8" "3.0.0"
 
-"web3@1.2.2":
+"web3@^1.2.2":
   "integrity" "sha512-/ChbmB6qZpfGx6eNpczt5YSUBHEA5V2+iUCbn85EVb3Zv6FVxrOo5Tv7Lw0gE2tW7EEjASbCyp3mZeiZaCCngg=="
   "resolved" "https://registry.npmjs.org/web3/-/web3-1.2.2.tgz"
   "version" "1.2.2"
@@ -11788,6 +11811,17 @@
     "web3-net" "1.2.2"
     "web3-shh" "1.2.2"
     "web3-utils" "1.2.2"
+
+"web3js-quorum@^21.7.0-rc1":
+  "integrity" "sha512-cCqdGlmfGCu4B1oecQWUPI/MfEA7Wc9w1Vou+o6xp4EvaPvqpHeZG17IYVZyXz8FGx7En/oA7meF+cYypyPieA=="
+  "resolved" "https://registry.npmjs.org/web3js-quorum/-/web3js-quorum-21.7.0-rc1.tgz"
+  "version" "21.7.0-rc1"
+  dependencies:
+    "ethereumjs-tx" "^2.1.2"
+    "ethereumjs-util" "6.1.0"
+    "lodash" "^4.17.21"
+    "request-promise-native" "^1.0.9"
+    "rlp" "2.2.4"
 
 "webidl-conversions@^4.0.2":
   "integrity" "sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg=="

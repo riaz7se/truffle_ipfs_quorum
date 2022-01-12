@@ -1,5 +1,7 @@
 # DApp with file upload on IPFS and Smart Contract on Quorum Blockchain
+
 -Still under development
+
 ## React Truffle unbox
 
 ```
@@ -21,20 +23,23 @@ npx truffle unbox react
 ```
 
 - Add compiler section to truffle-config.js
+
 ```
   truffle com
 ```
 
 ### With Ganache
+
 ```
  truffle migrate
-``` 
+```
+
 - Start ganache
 - Add account & network in metamask
 - cd client && npm run start
 
-
 ## On Quorum 7nodes
+
 ```
     quorum_vm: {
       host: "35.233.157.163",
@@ -45,35 +50,56 @@ npx truffle unbox react
       gas: 4500000
     }
 ```
+
 #### Run below cmd to migrate onto quorum
+
 ```
-truffle migrate --network quorum_vm  
+truffle migrate --network quorum_vm
 #or
 truffle migrate --network quorum_vm --reset
 ```
 
 #### above command may sometime result in error: Could not connect to your Ethereum client with the following parameters
+
 #### Keep try
+
+### Issue: URL is not constructor, comes after ading web3js-quorum
+
+-Fix
+-comment in node-modules/web3js-quorum/ptm.js
+-const { URL } = require("url");
+
 #### Once truflle migration completed, On Qurorum use below cmd to check migrated transaction
+
 - docker exec -it quorum-examples_node1_1 geth attach /qdata/dd/geth.ipc
 - > eth.getTransaction('0x4d50a518ccbae601ac78c637c2672cbc856bb1978bcb657a20f8ea2f2507583f')
-eth.getTransaction('0xbe71d39921ef78d8b45b7504a4393564b78116fc0f4479c52546f87e96f1e325')
+  > eth.getTransaction('0xbe71d39921ef78d8b45b7504a4393564b78116fc0f4479c52546f87e96f1e325')
 
 ### Adding Quorum network to Metamask
+
 New RPC URL: http://35.233.157.163:22000/
 Chain ID: 10
 
 #### Setup Metamask account with Qurorum
-#### get key1->ciphertext from qurorum**/7nodes/keys, and do account import in metamask
+
+#### get key1->ciphertext from qurorum\*\*/7nodes/keys, and do account import in metamask
+
 - "ciphertext":"4e77046ba3f699e744acb4a89c36a3ea1158a1bd90a076d36675f4c883864377"
+
 #### In browser, localhost:3000/, metamask asks for confirmation. do confirm. Copy Transid from metamask and execute below cmd in quorum node
+
 - eth.getTransaction('0xa192d724490758b94fd5d8d2dad35a3d3d3b53178f34a98da7ea61138d89704b')
 
 ### Quorum account keys from /key for adding to Metamask
+
 Node1 Acc:-4e77046ba3f699e744acb4a89c36a3ea1158a1bd90a076d36675f4c883864377
 Node2 Acc:-01d409941ce57b83a18597058033657182ffb10ae15d7d0906b8a8c04c8d1e3a
-Node3 Acc:-6b2c72c6793f3da8185e36536e02f574805e41c18f551f24b58346ef4ecf3640
+Node3 Acc:6b2c72c6793f3da8185e36536e02f574805e41c18f551f24b58346ef4ecf3640
 Node4 Acc:-d160a630a39be3ff35556055406d8ff2a635f0535fe298d62ccc812d8f7b3bd5
 
 Node7 Acc:-a522d53d5a86405435f6288d4e34b0c038de25f46fa935b0be78fd24d4aa65da
 
+--Transid:
+0xdecfc53bdeb1cf1076ae666eed9993400109a2f4d207f7e8916e054b096bf2b4
+
+var abi1=[{"inputs":[{"internalType":"string","name":"x","type":"string"}],"name":"set","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"get","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function","constant":true}]
