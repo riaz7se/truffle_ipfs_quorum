@@ -6,7 +6,7 @@ module.exports = {
   contracts_build_directory: path.join(__dirname, "client/src/contracts"),
   networks: {
     quorum_7_1: {
-      host: "35.230.64.204",
+      host: "35.199.146.253",
       port: 22000, // was 8545
       network_id: "*", // Match any network id
       gasPrice: 0,
