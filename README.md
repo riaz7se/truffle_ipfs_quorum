@@ -47,6 +47,21 @@ npx truffle unbox react
     }
 ```
 
+#### Added below to tessera-init.sh for cors this. but cors issue not resolved
+
+```
+    {
+      "app": "ThirdParty",
+      "serverAddress": "http://localhost:9081/",
+      "communicationType": "REST",
+      "cors" : {
+          "allowedMethods" : ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"],
+          "allowedOrigins" : ["http://localhost:3000/", "*"],
+          "allowedHeaders" : ["content-type"],
+          "allowCredentials" : true
+      }
+```
+
 #### Run below cmd to migrate onto quorum nodes
 
 ```
