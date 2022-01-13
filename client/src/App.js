@@ -33,8 +33,6 @@ class App extends Component {
         {
           fileUrl: url,
           ipfsHash: added.path,
-          contract: ipfsContract,
-          ipfsDeployedAddr: ipfsDeployedNetwork.address,
         },
         this.runContract
       );
