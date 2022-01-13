@@ -1,8 +1,12 @@
 # DApp with file upload on IPFS and Smart Contract on Quorum Blockchain
 
--Still under development
+- Reactjs front end app connects to Blockchain and the image is uploaded to ipfs. The hash of image
+- returned from ipfs will be stored in smart contract with private transaction setting privateFor,
+- so that only specific node has access to image and can view on browser
 
 ## React Truffle unbox
+
+- Front app created with truffle unbox
 
 ```
 mkdir truffle_react_ipfs
@@ -22,58 +26,42 @@ npx truffle unbox react
   Build for production: cd client && npm run build
 ```
 
-- Add compiler section to truffle-config.js
+### Complie contracts
+
+- Added compiler section to truffle-config.js
 
 ```
-  truffle com
+  truffle compile
 ```
-
-### With Ganache
-
-```
- truffle migrate
-```
-
-- Start ganache
-- Add account & network in metamask
-- cd client && npm run start
 
 ## On Quorum 7nodes
 
 ```
     quorum_vm: {
-      host: "35.233.157.163",
-      port: 22000, // was 8545
-      network_id: "*", // Match any network id
+      host: "remote-ip",
+      port: 22000,
+      network_id: "*",
       gasPrice: 0,
       type: "quorum",
       gas: 4500000
     }
 ```
 
-#### Run below cmd to migrate onto quorum
+#### Run below cmd to migrate onto quorum nodes
 
 ```
-truffle migrate --network quorum_vm
-#or
-truffle migrate --network quorum_vm --reset
+truffle migrate --network quorum_7_1 --reset
 ```
 
-#### above command may sometime result in error: Could not connect to your Ethereum client with the following parameters
+### Start React app
 
-#### Keep try
+- npm run start
 
-### Issue: URL is not constructor, comes after ading web3js-quorum
+### Issue faced after adding web3js-quorum:
 
--Fix
--comment in node-modules/web3js-quorum/ptm.js
--const { URL } = require("url");
-
-#### Once truflle migration completed, On Qurorum use below cmd to check migrated transaction
-
-- docker exec -it quorum-examples_node1_1 geth attach /qdata/dd/geth.ipc
-- > eth.getTransaction('0x4d50a518ccbae601ac78c637c2672cbc856bb1978bcb657a20f8ea2f2507583f')
-  > eth.getTransaction('0xbe71d39921ef78d8b45b7504a4393564b78116fc0f4479c52546f87e96f1e325')
+- URL is not constructor
+- resolved by commenting const { URL } = require("url"); in node-modules/web3js-quorum/ptm.js
+- Will investigate on this later
 
 ### Adding Quorum network to Metamask
 
@@ -89,6 +77,13 @@ Chain ID: 10
 #### In browser, localhost:3000/, metamask asks for confirmation. do confirm. Copy Transid from metamask and execute below cmd in quorum node
 
 - eth.getTransaction('0xa192d724490758b94fd5d8d2dad35a3d3d3b53178f34a98da7ea61138d89704b')
+
+#### Checkings
+
+#### Once truflle migration completed, On Qurorum use below cmd to check migrated transaction
+
+- docker exec -it quorum-examples_node1_1 geth attach /qdata/dd/geth.ipc
+- > eth.getTransaction('<tx>')
 
 ### Quorum account keys from /key for adding to Metamask
 

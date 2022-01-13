@@ -12,7 +12,6 @@ const getWeb3 = async () =>
         new Web3("http://localhost:22000"),
         {
           privateUrl: "http://localhost:9081",
-          // ipcPath: "/root/quorum-examples/examples/7nodes/qdata/c1/tm.ipc",
         },
         true
       );

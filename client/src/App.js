@@ -22,6 +22,7 @@ class App extends Component {
 
   componentDidMount = async () => {};
 
+  //Upload image to ipfs and get ipfsHash
   uploadFile = async (e) => {
     const file = e.target.files[0];
     const { web3, accounts, networkId, ipfsHash } = this.state;
@@ -41,6 +42,7 @@ class App extends Component {
     }
   };
 
+  //run private contract to store ipfsHash
   runContract = async () => {
     const { web3, accounts, networkId, ipfsHash } = this.state;
 
@@ -120,6 +122,7 @@ class App extends Component {
     })();
   };
 
+  //connect to blockchain and render image if ipfshash already exists in contract
   render() {
     const connectBlockchain = async (e) => {
       e.preventDefault();
