@@ -1855,12 +1855,12 @@
     "10": {
       "events": {},
       "links": {},
-      "address": "0xA501AfD7d6432718daF4458Cfae8590d88de818E",
-      "transactionHash": "0x96a6c713a3cbc7b800b2fdff4cc174177b884a22c3bf119862cc1d9734e549a1"
+      "address": "0x1932c48b2bF8102Ba33B4A6B545C32236e342f34",
+      "transactionHash": "0x9a9b221ca80296e0ffa82fc54e06308c7c689dd23c60561af0795c27510bf387"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2022-01-12T03:57:39.098Z",
+  "updatedAt": "2022-01-13T17:53:06.486Z",
   "networkType": "quorum",
   "devdoc": {
     "kind": "dev",

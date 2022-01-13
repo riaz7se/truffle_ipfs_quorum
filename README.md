@@ -101,5 +101,3 @@ Node7 Acc:-a522d53d5a86405435f6288d4e34b0c038de25f46fa935b0be78fd24d4aa65da
 
 --Transid:
 0xdecfc53bdeb1cf1076ae666eed9993400109a2f4d207f7e8916e054b096bf2b4
-
-var abi1=[{"inputs":[{"internalType":"string","name":"x","type":"string"}],"name":"set","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"get","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function","constant":true}]

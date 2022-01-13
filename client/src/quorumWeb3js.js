@@ -9,9 +9,10 @@ const getWeb3 = async () =>
     if (window.ethereum) {
       //const web3 = new Web3(window.ethereum);
       const web3 = new Web3Quorum(
-        new Web3("http://35.230.64.204:22000"),
+        new Web3("http://localhost:22000"),
         {
-          privateUrl: "http://35.230.64.204:9081",
+          privateUrl: "http://localhost:9081",
+          // ipcPath: "/root/quorum-examples/examples/7nodes/qdata/c1/tm.ipc",
         },
         true
       );
